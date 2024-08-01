@@ -3,6 +3,7 @@ import React from 'react';
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 
 const UserLayout = () => {
   return (
@@ -29,7 +30,7 @@ const UserLayout = () => {
           title: 'Home',
           tabBarIcon: ({ color, size, focused }) => (
             <Ionicons
-              name="home"
+              name={focused ? "home" : "home-outline"}
               color={focused ? '#090e7a' : '#133eba'} 
               size={24}
             />
@@ -45,64 +46,21 @@ const UserLayout = () => {
       />
 
       <Tabs.Screen
-        name="cart"
-        options={{
+        name="data"
+        options={({ navigation }) => ({
           headerShown: true,
-          title: 'Cart',
-            headerTitleStyle:{
-                fontFamily: 'PlusJakartaSans-Bold',  
-                textAlign: "center",
-                
-            },
-            headerStyle:{
-              backgroundColor:'#133eba',
-              borderBottomColor: 'transparent',
-              
-            },
-
-            headerTintColor: 'white',
-            tabBarIcon: ({ color, size, focused }) => (
+          title: 'Buy Data',
+          tabBarIcon: ({ color, size, focused }) => (
             <Ionicons
-              name="cart"
+              name={focused ? "globe" : "globe-outline"}
               color={focused ? '#090e7a' : '#133eba'} 
               size={24}
             />
           ),
-        
-          tabBarLabelStyle: {
+          headerTitleStyle: {
             fontFamily: 'PlusJakartaSans-Bold',
-            fontSize: 15,
             color: '#133eba',
           },
-          tabBarActiveTintColor: '#090e7a', 
-          tabBarInactiveTintColor: '#133eba',
-        }}
-      />
-
-      <Tabs.Screen
-        name="invoice"
-        options={{
-          headerShown: true,
-          title: 'Invoice',
-            headerTitleStyle:{
-                fontFamily: 'PlusJakartaSans-Bold',  
-                textAlign: "center",
-                
-            },
-            headerStyle:{
-              backgroundColor:'#133eba',
-              borderBottomColor: 'transparent',
-            },
-
-            headerTintColor: 'white',
-            tabBarIcon: ({ color, size, focused }) => (
-            <Ionicons
-              name="document-text"
-              color={focused ? '#090e7a' : '#133eba'} 
-              size={24}
-            />
-          ),
-        
           tabBarLabelStyle: {
             fontFamily: 'PlusJakartaSans-Bold',
             fontSize: 14,
@@ -110,33 +68,67 @@ const UserLayout = () => {
           },
           tabBarActiveTintColor: '#090e7a', 
           tabBarInactiveTintColor: '#133eba',
-        }}
+          
+          headerLeft: () => (
+            <Ionicons
+              name="arrow-back"
+              size={24}
+              color="#133eba"
+              onPress={() => navigation.goBack()} 
+              style={{ marginLeft: 10, marginTop: 7 }}
+            />
+          ),
+        })}
       />
 
       <Tabs.Screen
-        name="products"
-        options={{
+        name="airtime"
+        options={({ navigation }) => ({
           headerShown: true,
-          title: 'Products',
-            headerTitleStyle:{
-                fontFamily: 'PlusJakartaSans-Bold',  
-                textAlign: "center",
-                
-            },
-            headerStyle:{
-              backgroundColor:'#133eba',
-              borderBottomColor: 'transparent',
-            },
-
-            headerTintColor: 'white',
-            tabBarIcon: ({ color, size, focused }) => (
+          title: 'Buy Airtime',
+          tabBarIcon: ({ color, size, focused }) => (
             <Ionicons
-              name="bag-handle"
+              name={focused ? "call" : "call-outline"}
               color={focused ? '#090e7a' : '#133eba'} 
               size={24}
             />
           ),
-        
+          headerTitleStyle: {
+            fontFamily: 'PlusJakartaSans-Bold',
+            color: '#133eba',
+          },
+          tabBarLabelStyle: {
+            fontFamily: 'PlusJakartaSans-Bold',
+            fontSize: 14,
+            color: '#133eba',
+          },
+          tabBarActiveTintColor: '#090e7a', 
+          tabBarInactiveTintColor: '#133eba',
+          
+          headerLeft: () => (
+            <Ionicons
+              name="arrow-back"
+              size={24}
+              color="#133eba"
+              onPress={() => navigation.goBack()} 
+              style={{ marginLeft: 10, marginTop: 7 }}
+            />
+          ),
+        })}
+      />
+
+      <Tabs.Screen
+        name="profile"
+        options={{
+          headerShown: false,
+          title: 'Profile',
+          tabBarIcon: ({ color, size, focused }) => (
+            <Ionicons
+              name={focused ? "person" : "person-outline"}
+              color={focused ? '#090e7a' : '#133eba'} 
+              size={24}
+            />
+          ),
           tabBarLabelStyle: {
             fontFamily: 'PlusJakartaSans-Bold',
             fontSize: 14,
@@ -148,6 +140,7 @@ const UserLayout = () => {
       />
 
     </Tabs>
+    
   );
 };
 

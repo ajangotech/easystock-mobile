@@ -5,20 +5,17 @@ import { Link, router } from 'expo-router';
 import CustomSetAreaView from '../../components/CustomSetAreaView';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
-
+import styles from '../../components/styles/authstyles';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // Add your login logic here
     console.log('Logging in with:', email, password);
-    // Example redirection on successful login
     router.push('/home');
   };
 
   const handleSignUp = () => {
-    // Navigate to sign-up screen
     router.push('/signup');
   };
 
@@ -28,10 +25,11 @@ const Login = () => {
       <View style={styles.safeArea}>
         <View style={styles.container}>
           <View style={styles.main}>
+
             <View style={{ alignItems: 'center' }}>
               <Image source={require('../../assets/images/icon.png')} style={styles.icon} />
               <Text style={styles.title}>
-                EasyStock <Text style={{ fontSize: 14 }}>(v1.0)</Text>
+                AjangoVTU <Text style={{ fontSize: 14 }}>(v1.0)</Text>
               </Text>
             </View>
 
@@ -62,7 +60,7 @@ const Login = () => {
 
             <View style={styles.footer}>
               <Text style={styles.footerText}>
-                EasyStock Version 1.0 <Ionicons name='accessibility'/>
+                Don't have an account ? <Link href="/register" style={{ color: 'red' }}>Register</Link>
               </Text>
             </View>
           </View>
@@ -73,50 +71,3 @@ const Login = () => {
 };
 
 export default Login;
-
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
-    fontFamily: 'PlusJakartaSans-Medium',
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    fontFamily: 'PlusJakartaSans-Medium',
-    padding: 24,
-    width: '100%',
-  },
-  main: {
-    flex: 1,
-    justifyContent: 'center',
-    maxWidth: 960,
-    fontFamily: 'PlusJakartaSans-Medium',
-    width: '100%',
-  },
-  icon: {
-    width: 80,
-    height: 80,
-  },
-  title: {
-    fontFamily: 'PlusJakartaSans-Bold',
-    fontSize: 40,
-  },
-  form: {
-    width: '100%',
-    marginVertical: 20,
-    fontFamily: 'PlusJakartaSans-Medium',
-  },
-  
-  footer: {
-    marginTop: 20,
-    alignItems: 'center',
-    fontFamily: 'PlusJakartaSans-Medium',
-  },
-  footerText: {
-    fontSize: 14,
-    color: '#000',
-    fontFamily: 'PlusJakartaSans-Bold',
-    color: '#133eba'
-  },
-});

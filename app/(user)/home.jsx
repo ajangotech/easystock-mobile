@@ -1,39 +1,62 @@
-import { View, Text, StyleSheet, FlatList, RefreshControl, ScrollView, Image } from 'react-native'
+import { View, Text, StyleSheet, FlatList, RefreshControl, ScrollView, Image, TouchableWithoutFeedback, ImageBackground } from 'react-native'
 import React, { useState } from 'react'
 import CustomSetAreaView from '../../components/CustomSetAreaView'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import CustomLinks from '../../components/CustomLinks';
+import Clipboard from "@react-native-community/react-native-clipboard";
+import CustomAlert from '../../components/CustomAlert'
+import styles from '../../components/styles/styles';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const Home = () => {
-  const [search, setSearch] = useState('');
   const [refreshing, setRefreshing] = useState(false);
-  const onRefresh = null;
+  const [viewBalance, setViewBalance] = useState(false);
+  const [viewBalanceName, setViewBalanceName] = useState('eye');
+  const [viewBalanceAmount, setViewBalanceAmount] = useState(false);
+  const [alertVisible, setAlertVisible] = useState(false);
 
+  const handleViewBalance = () => {
+    setViewBalance(!viewBalance);
+    setViewBalanceAmount(!viewBalanceAmount);
+    setViewBalanceName(viewBalance ? 'eye' : 'eye-off-outline');
+  }
+  
+  const onRefresh = null;
   const data = [
-    { id: 1, product_name: 'Cotton Wool', qty: 50, prices: { purchased: '50,000', wholesale: '50,000', retail: '50,000' }, status: 'active' },
-    { id: 2, product_name: 'Padlock', qty: 24, prices: { purchased: '30,000', wholesale: '13,000', retail: '23,000' }, status: 'active' },
-    { id: 3, product_name: 'Notebook', qty: 100, prices: { purchased: '10,000', wholesale: '12,000', retail: '15,000' }, status: 'active' },
-    { id: 4, product_name: 'Pen', qty: 200, prices: { purchased: '1,000', wholesale: '1,500', retail: '2,000' }, status: 'active' },
-    { id: 5, product_name: 'Laptop Charger', qty: 15, prices: { purchased: '5,000', wholesale: '6,000', retail: '8,000' }, status: 'inactive' },
-    { id: 6, product_name: 'Smartphone Case', qty: 60, prices: { purchased: '2,000', wholesale: '2,500', retail: '3,000' }, status: 'active' },
-    { id: 7, product_name: 'Headphones', qty: 30, prices: { purchased: '15,000', wholesale: '18,000', retail: '22,000' }, status: 'active' },
-    { id: 8, product_name: 'Wireless Mouse', qty: 45, prices: { purchased: '3,000', wholesale: '4,000', retail: '5,000' }, status: 'active' },
-    { id: 9, product_name: 'Office Chair', qty: 10, prices: { purchased: '50,000', wholesale: '55,000', retail: '60,000' }, status: 'inactive' },
-    { id: 10, product_name: 'Desk Lamp', qty: 25, prices: { purchased: '7,000', wholesale: '8,500', retail: '10,000' }, status: 'active' },
+    { id: 1, account_no: '8137736578', account_name: 'AjangoVTU', charges: 35, bank_name: 'Opay',  status: 'active' },    
+    { id: 2, account_no: '8058622295', account_name: 'AjangoVTU', charges: 35, bank_name: 'Moniepoint',  status: 'active' },    
   ];
 
 
+  const copyToClipboard = (account_no) => {
+    Clipboard.setString(account_no);
+    <CustomAlert />
+  };
+  
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
-      <Text style={{color:"#fff", fontFamily: 'PlusJakartaSans-Bold',}}>&#8358;{item.prices.wholesale}</Text>
-      <Text style={{color:"#fff", fontFamily: 'PlusJakartaSans-Bold',}}>{item.product_name}</Text>
+      <View style={{ display: 'flex', flexDirection: 'row', gap: 30}}>
+        <View>
+          <Text style={{color:"#fff", fontFamily: 'PlusJakartaSans-Bold',}}>Account No:</Text>
+          <Text style={{color:"#fff", fontFamily: 'PlusJakartaSans-Bold', fontSize: 20}}>{item.account_no}  <Text style={{ fontWeight: 'bold' }}><TouchableWithoutFeedback onPress={() => copyToClipboard(item.account_no)}><Ionicons name='copy-outline' style={{ fontSize: 16 }} /></TouchableWithoutFeedback></Text></Text>
+          <Text style={{color:"#fff", fontFamily: 'PlusJakartaSans-Bold',}}>Account Name:</Text>
+          <Text style={{color:"#fff", fontFamily: 'PlusJakartaSans-Bold', fontSize: 15}}>{item.account_name}</Text>
+        </View>
+        <View>
+          <Text style={{color:"#fff", fontFamily: 'PlusJakartaSans-Bold',}}>Charges:</Text>
+          <Text style={{color:"#fff", fontFamily: 'PlusJakartaSans-Bold', fontSize: 15}}>	&#8358;{item.charges}</Text>
+          <Text style={{color:"#fff", fontFamily: 'PlusJakartaSans-Bold',}}>Bank Name:</Text>
+          <Text style={{color:"#fff", fontFamily: 'PlusJakartaSans-Bold', fontSize: 15}}>{item.bank_name}</Text>
+        </View>
+      </View>
     </View>
   );
 
   return (
-    <>
-      <CustomSetAreaView />
+    <SafeAreaView>
       <ScrollView
         refreshControl={
           <RefreshControl
@@ -44,38 +67,27 @@ const Home = () => {
           />
         }
       >
-
         <View style={styles.safeArea}>
         <View style={styles.wrapper}>
-          <Ionicons name="notifications" size={24} color='#133eba' /> 
-        </View>
-        <Text style={styles.subtitle}>Welcome! Abdurrahim, [aymmuazu].</Text>
-
-        <View>
-          <Text style={styles.title}>Search a Product</Text>
+          <Image source={require('../../assets/images/icon.png')} style={styles.icon}/>
           <View>
-            <CustomInput 
-                value={search} 
-                placeholder="e.g. 40 Leaves"   
-                onChangeText={setSearch}
-                keyboardType="text"
-                autoCapitalize="none"
-              />
+            <Text style={styles.subtitle}>
+              Welcome! Abdurrahim,
+            </Text>
+            <Text style={styles.username}>aymmuazu</Text>
           </View>
-
-          <CustomButton 
-            title="Search"
-          />
-
         </View>
 
-        <View style={{ marginTop: 20 }}>
-          <Text style={styles.title}>Daily <Ionicons name="bar-chart" size={14}/></Text>
-          <Text style={styles.subtitle}>Total Sales:    <Text style={{ fontSize: 14 }}>&#8358; 1,000:00</Text></Text>
-          <Text style={styles.subtitle}>Total Discount:    <Text style={{ fontSize: 14 }}>&#8358; 50</Text></Text>
-          <Text style={styles.subtitle}>Total Invoices:    <Text style={{ fontSize: 14 }}>(10)</Text></Text>
+        <View style={styles.cardAccount}> 
+            <Text style={styles.available}>Available Balance:</Text>
+            <Text style={styles.balance}>
+              {viewBalanceAmount ? "******" : "₦1,500.0"}
+            </Text>
+            <TouchableWithoutFeedback onPress={handleViewBalance}>
+              <Ionicons style={styles.eyeText} name={viewBalanceName} />
+            </TouchableWithoutFeedback>
         </View>
-
+        
         <View style={{ marginTop: 20 }}>
           <FlatList 
             data={data}
@@ -84,6 +96,18 @@ const Home = () => {
             renderItem={renderItem}
             contentContainerStyle={styles.flatListContainer}
           />
+        </View>
+
+        <View>
+          <View style={{ marginTop: 15, display: 'flex', flexDirection: 'row' }}>
+            <Text style={styles.title}>Notifications</Text>
+            <Ionicons style={{ fontSize: 30, marginTop: 4 }} name="notifications-circle-outline"/>
+          </View>
+
+          <View style={styles.notificationBanner}>
+            <Text style={{ color: '#fff', marginBottom: 4, fontFamily: 'PlusJakartaSans-Bold', fontSize: 15 }}>Please update your transaction.</Text>
+          </View>
+
         </View>
 
         <View style={{ marginTop: 20 }}>
@@ -98,61 +122,8 @@ const Home = () => {
         </View>
       </View>
       </ScrollView>
-    </>
+    </SafeAreaView>
   )
 }
 
 export default Home;
-
-const styles = StyleSheet.create({
-  safeArea: {
-    fontFamily: 'PlusJakartaSans-Bold',
-    flex: 1,
-    backgroundColor: '#FFFFFF',
-    padding: 20
-  },
-
-  flatListContainer: {
-    paddingVertical: 10,
-    paddingLeft:10
-  },
-  itemContainer: {
-    backgroundColor: '#133eba',
-    borderRadius: 10,
-    height: 80,
-    width: 120,
-    marginRight: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  wrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 3,
-    marginBottom: 30
-  },
-  subtitle: {
-    fontFamily: 'PlusJakartaSans-Bold',
-  },
-  title: {
-    fontSize: 20,
-    fontFamily: 'PlusJakartaSans-Bold',
-  },
-  recenttitle: {
-    fontSize: 18,
-    fontFamily: 'PlusJakartaSans-Bold',
-  },
-
-  transaction: {
-    height: 250,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  transbody: {
-    fontFamily: 'PlusJakartaSans-Medium',
-    textAlign: 'center',
-    color: 'red'
-  }
-});

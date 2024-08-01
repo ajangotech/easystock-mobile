@@ -7,7 +7,7 @@ const CustomButton = ({ title, icon_name, icon_size, icon_color, handleSubmit  }
     <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <View style={styles.buttonContent}>
             <Text style={styles.buttonText}>{title}</Text>
-            <Ionicons name={icon_name} size={icon_size} color={icon_color} />
+            <Ionicons name={icon_name} style={{ marginTop: 0 }} size={icon_size} color={icon_color} />
         </View>
     </TouchableOpacity>
   )
@@ -26,10 +26,12 @@ const styles = StyleSheet.create({
   buttonContent: {
     flexDirection: 'row',
     alignItems: 'center',
+    alignContent: 'center'
   },
   buttonText: {
     color: '#FFFFFF',
-    fontSize: 15,
+    fontSize: 18,
+    marginBottom: 6,
     textTransform: 'uppercase',
     fontFamily: 'PlusJakartaSans-Bold',
     marginRight: 5, 
