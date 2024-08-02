@@ -45,6 +45,11 @@ const styles = StyleSheet.create({
     fontFamily: 'PlusJakartaSans-Bold',
     color: '#133eba'
   },
+
+  fingerPrintView: {
+    alignContent: 'center',
+    alignItems: 'center'
+  }
 });
 
 

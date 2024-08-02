@@ -4,19 +4,24 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from '../../components/styles/styles';
 import { Dropdown } from 'react-native-element-dropdown';
 import AntDesign from '@expo/vector-icons/AntDesign';
-import CustomInput from '../../components/CustomInput'
-import CustomButton from '../../components/CustomButton'
+import CustomInput from '../../components/CustomInput';
+import CustomButton from '../../components/CustomButton';
 import { CheckBox } from 'react-native-elements';
 
 const Airtime = () => {
 
   const [refreshing, setRefreshing] = useState(false);
-  const onRefresh = null;
   const [selectedNetwork, setSelectedNetwork] = useState(null);
-  const [selectedPlanType, setSelectedPlanType] = useState(null);
-  const [selectedPlan, setSelectedPlan] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+
+  // Function to handle refresh
+  const onRefresh = () => {
+    setRefreshing(true);
+    // Add your refresh logic here
+    // After refresh logic is done
+    setRefreshing(false);
+  };
 
   const networks = [
     { label: 'MTN', value: '1' },
@@ -24,7 +29,6 @@ const Airtime = () => {
     { label: 'GLO', value: '3' },
     { label: '9MOBILE', value: '4' },
   ];
-
 
   const renderLabel = (label) => {
     if (label || isFocus) {
@@ -37,10 +41,9 @@ const Airtime = () => {
     return null;
   };
 
-
   const handleSubmit = () => {
-    return null;
-  }
+    // Add your submit logic here
+  };
 
   return (
     <View style={{ marginTop: 20 }}>
@@ -56,7 +59,6 @@ const Airtime = () => {
       >
         <View style={styles.safeArea}>
           <View style={styles.container}>
-           
             {renderLabel('Select Network')}
             <Dropdown
               style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
@@ -97,16 +99,7 @@ const Airtime = () => {
             </View>
 
             <View>
-              <CheckBox
-                title="Ported"
-                checked={isChecked}
-                onPress={() => setIsChecked(!isChecked)}
-                checkedColor="#133eba"
-                uncheckedColor="#ccc"
-                textStyle={styles.checktextStyle} 
-                containerStyle={styles.checkboxContainer}
-                iconLeft
-              />
+              
             </View>
 
             <View style={styles.customInputView}>
@@ -114,8 +107,10 @@ const Airtime = () => {
                 <CustomButton 
                   title="Buy Airtime" 
                   icon_name="globe-outline" 
-                  icon_size={20} icon_color="white" 
-                  handleSubmit={handleSubmit}/>
+                  icon_size={20} 
+                  icon_color="white" 
+                  handleSubmit={handleSubmit}
+                />
               </TouchableOpacity>
             </View>
 

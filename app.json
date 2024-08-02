@@ -1,14 +1,15 @@
 {
   "expo": {
-    "name": "EasyVTU",
-    "slug": "easyvtu",
-    "scheme": "easyvtu",
+    "name": "AjangoVTU",
+    "slug": "AjangoVTU",
+    "scheme": "AjangoVTU",
+    "owner": "aymmuazu",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/banner.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,16 +18,25 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.aymmuazu.easyvtu"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/images/icon.png"
     },
     "plugins": [
       "expo-router",
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "610de0cb-5634-46e3-aa9e-418a255245e0"
+      }
+    }
   }
 }

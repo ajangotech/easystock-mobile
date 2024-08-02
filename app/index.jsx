@@ -20,14 +20,14 @@ export default function Page() {
             </View>
 
             <Image source={require('../assets/images/banner.png')} style={styles.banner}/>
-            <Text style={styles.subtitle}>Buy Data, Airtime, Electrcity and CableTV Tokens.</Text>
+            <Text style={styles.subtitle}>Let's Buy Data and Airtime</Text>
 
             <View style={{ marginTop: 20 }}>
               <CustomButton 
                 title="Continue" 
                 icon_name="arrow-forward-circle-sharp" 
                 icon_size={20} icon_color="white" 
-                handleSubmit={() => router.push('/home')} />
+                handleSubmit={() => router.push('/login')} />
             </View>
 
             

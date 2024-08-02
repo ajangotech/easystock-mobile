@@ -179,16 +179,7 @@ const Data = () => {
             </View>
 
             <View>
-              <CheckBox
-                title="Ported"
-                checked={isChecked}
-                onPress={() => setIsChecked(!isChecked)}
-                checkedColor="#133eba"
-                uncheckedColor="#ccc"
-                textStyle={styles.checktextStyle} 
-                containerStyle={styles.checkboxContainer}
-                iconLeft
-              />
+              
             </View>
 
             <View style={styles.customInputView}>

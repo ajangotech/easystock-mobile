@@ -6,18 +6,19 @@ import CustomSetAreaView from '../../components/CustomSetAreaView';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import styles from '../../components/styles/authstyles';
+import { TouchableWithoutFeedback } from 'react-native';
 const Login = () => {
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    console.log('Logging in with:', email, password);
+  const handleLogin = (e) => {
     router.push('/home');
   };
 
-  const handleSignUp = () => {
-    router.push('/signup');
-  };
+  const handleFingerPrint = () => {
+    return null;
+  }
 
   return (
     <>
@@ -54,13 +55,18 @@ const Login = () => {
                 title="Login" 
                 icon_name="log-in" 
                 icon_size={32} icon_color="white" 
-                handleSubmit={() => handleLogin} />
-
+                handleSubmit={handleLogin} />
+            </View>
+            
+            <View style={styles.fingerPrintView}>
+              <TouchableWithoutFeedback onPress={handleFingerPrint}>
+                <Ionicons color="#133eba" size={60} name="finger-print"/>
+              </TouchableWithoutFeedback>
             </View>
 
             <View style={styles.footer}>
               <Text style={styles.footerText}>
-                Don't have an account ? <Link href="/register" style={{ color: 'red' }}>Register</Link>
+                Don't have an account ? <Link href="/" style={{ color: 'red' }}>Register</Link>
               </Text>
             </View>
           </View>
