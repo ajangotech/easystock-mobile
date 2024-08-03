@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, StatusBar } from 'react-native';
 import React from 'react';
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -49,10 +49,10 @@ const UserLayout = () => {
         name="data"
         options={({ navigation }) => ({
           headerShown: true,
-          title: 'Buy Data',
+          title: 'Data',
           tabBarIcon: ({ color, size, focused }) => (
             <Ionicons
-              name={focused ? "globe" : "globe-outline"}
+              name={focused ? "wifi" : "wifi-outline"}
               color={focused ? '#090e7a' : '#133eba'} 
               size={24}
             />
@@ -85,7 +85,7 @@ const UserLayout = () => {
         name="airtime"
         options={({ navigation }) => ({
           headerShown: true,
-          title: 'Buy Airtime',
+          title: 'Airtime',
           tabBarIcon: ({ color, size, focused }) => (
             <Ionicons
               name={focused ? "call" : "call-outline"}
@@ -119,8 +119,8 @@ const UserLayout = () => {
 
       <Tabs.Screen
         name="profile"
-        options={{
-          headerShown: false,
+        options={({ navigation }) => ({
+          headerShown: true,
           title: 'Profile',
           tabBarIcon: ({ color, size, focused }) => (
             <Ionicons
@@ -129,6 +129,10 @@ const UserLayout = () => {
               size={24}
             />
           ),
+          headerTitleStyle: {
+            fontFamily: 'PlusJakartaSans-Bold',
+            color: '#133eba',
+          },
           tabBarLabelStyle: {
             fontFamily: 'PlusJakartaSans-Bold',
             fontSize: 14,
@@ -136,9 +140,18 @@ const UserLayout = () => {
           },
           tabBarActiveTintColor: '#090e7a', 
           tabBarInactiveTintColor: '#133eba',
-        }}
-      />
-
+          
+          headerLeft: () => (
+            <Ionicons
+              name="arrow-back"
+              size={24}
+              color="#133eba"
+              onPress={() => navigation.goBack()} 
+              style={{ marginLeft: 10, marginTop: 7 }}
+            />
+          ),
+        })}
+      />      
     </Tabs>
     
   );

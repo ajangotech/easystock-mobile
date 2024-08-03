@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
-import { View, Text, Modal, StyleSheet, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { View, Text, Modal, StyleSheet, TouchableOpacity, useColorScheme } from 'react-native';
 
 const CustomAlert = ({ visible, onClose, title, message }) => {
+  const colorScheme = useColorScheme();
+
+  const isDarkMode = colorScheme === 'dark';
+
   return (
     <Modal
       transparent={true}
@@ -10,11 +14,11 @@ const CustomAlert = ({ visible, onClose, title, message }) => {
       onRequestClose={onClose}
     >
       <View style={styles.modalBackground}>
-        <View style={styles.alertContainer}>
-          <Text style={styles.alertTitle}>{title}</Text>
-          <Text style={styles.alertMessage}>{message}</Text>
-          <TouchableOpacity style={styles.closeButton} onPress={onClose}>
-            <Text style={styles.closeButtonText}>OK</Text>
+        <View style={[styles.alertContainer, isDarkMode ? styles.darkAlertContainer : styles.lightAlertContainer]}>
+          <Text style={[styles.alertTitle, isDarkMode ? styles.darkAlertTitle : styles.lightAlertTitle]}>{title}</Text>
+          <Text style={[styles.alertMessage, isDarkMode ? styles.darkAlertMessage : styles.lightAlertMessage]}>{message}</Text>
+          <TouchableOpacity style={[styles.closeButton, isDarkMode ? styles.darkCloseButton : styles.lightCloseButton]} onPress={onClose}>
+            <Text style={[styles.closeButtonText, isDarkMode ? styles.darkCloseButtonText : styles.lightCloseButtonText]}>OK</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -29,37 +33,65 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
   },
   alertContainer: {
     width: 300,
     padding: 20,
-    backgroundColor: '#133eba', // Custom background color
     borderRadius: 10,
     alignItems: 'center',
   },
+  lightAlertContainer: {
+    backgroundColor: '#133eba',
+  },
+  darkAlertContainer: {
+    backgroundColor: '#133eba',
+  },
   alertTitle: {
     fontSize: 20,
-    fontFamily: 'PlusJakartaSans-Bold',
-    color: '#fff', // Text color
     marginBottom: 10,
+  },
+  lightAlertTitle: {
+    color: '#fff',
+    fontFamily: 'PlusJakartaSans-Bold',
+  },
+  darkAlertTitle: {
+    color: '#fff',
+    fontFamily: 'PlusJakartaSans-Bold',
   },
   alertMessage: {
     fontSize: 16,
-    fontFamily: 'PlusJakartaSans-Medium',
-    color: '#fff', // Text color
     textAlign: 'center',
     marginBottom: 20,
   },
+  lightAlertMessage: {
+    color: '#fff',
+    fontFamily: 'PlusJakartaSans-Medium',
+  },
+  darkAlertMessage: {
+    color: '#ddd',
+    fontFamily: 'PlusJakartaSans-Medium',
+  },
   closeButton: {
-    backgroundColor: '#fff',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
   },
+  lightCloseButton: {
+    backgroundColor: '#fff',
+  },
+  darkCloseButton: {
+    backgroundColor: '#333',
+  },
   closeButtonText: {
-    color: '#133eba', // Button text color
     fontSize: 16,
+  },
+  lightCloseButtonText: {
+    color: '#133eba',
+    fontFamily: 'PlusJakartaSans-Bold',
+  },
+  darkCloseButtonText: {
+    color: '#ddd',
     fontFamily: 'PlusJakartaSans-Bold',
   },
 });

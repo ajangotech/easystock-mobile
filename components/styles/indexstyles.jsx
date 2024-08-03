@@ -1,9 +1,11 @@
+import { useColorScheme } from 'react-native';
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+const styles = (colorScheme) => StyleSheet.create({
+  
   safeArea: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colorScheme === 'dark' ? '#fff' : '#fff',
   },
   container: {
     flex: 1,
@@ -24,13 +26,13 @@ const styles = StyleSheet.create({
   },
   banner: {
     width: '100%',
-    height: 320,
+    height: 350,
     resizeMode: 'cover',
     marginVertical: 20,
   },
   title: {
     fontFamily: 'PlusJakartaSans-Bold',
-    fontSize: 40,
+    fontSize: 30,
   },
   subtitle: {
     fontSize: 16,

@@ -5,8 +5,9 @@ const styles = StyleSheet.create({
   cardAccount: {
     backgroundColor: '#133eba',
     borderRadius: 20,
-    height: 130,
-    marginRight: 0,
+    height: 150,
+    marginRight: 10,
+    marginLeft: 10,
     padding: 10,
     marginTop: 10
   },
@@ -41,6 +42,10 @@ const styles = StyleSheet.create({
     color: '#fff', fontSize: 15,
     fontFamily: 'PlusJakartaSans-Bold',
   },
+  profileFont: {
+    fontFamily: 'PlusJakartaSans-Medium',
+    fontSize: 15
+  },
   balance: {
     marginTop: 0,
     fontSize: 30,
@@ -52,12 +57,53 @@ const styles = StyleSheet.create({
     fontFamily: 'PlusJakartaSans-Bold',
     flex: 1,
     backgroundColor: '#FFFFFF',
-    padding: 20
+    padding: 20,
   },
   flatListContainer: {
     paddingVertical: 10,
     paddingLeft:10
   },
+  helpcenter: {
+    fontSize: 15,
+    fontFamily: 'PlusJakartaSans-Medium',
+    padding: 3
+  },
+
+  helpcenterLink: {
+    fontSize: 17,
+    fontFamily: 'PlusJakartaSans-Bold',
+    padding: 3,
+    color: '#133eba',
+  },
+
+  badgeItem: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 10,
+  },
+
+  badge: {
+    color: '#fff',
+    backgroundColor: '#133eba',
+    borderRadius: 10,
+    width: 100,
+    padding: 10,
+    alignItems: 'center',
+    itemContainer: 'center',
+    marginTop: 10
+  },
+
+  badgeLogout: {
+    color: '#fff',
+    backgroundColor: 'red',
+    borderRadius: 10,
+    width: 100,
+    padding: 10,
+    alignItems: 'center',
+    itemContainer: 'center',
+    marginTop: 10
+  },
+
   itemContainer: {
     backgroundColor: '#133eba',
     borderRadius: 10,
@@ -112,6 +158,9 @@ const styles = StyleSheet.create({
   icon_style: {
     marginRight: 5,
   },
+  container: {
+    marginTop: 20,
+  },
   label: {
     position: 'absolute',
     backgroundColor: 'white',
@@ -153,6 +202,15 @@ const styles = StyleSheet.create({
     fontSize: 16,  
     color: '#595959',
   },
+  profile: {
+    alignContent: 'center',
+    alignItems: 'center'
+  },
+  profileFooter: {
+    alignContent: 'center',
+    alignItems: 'center',
+    marginTop: 30,
+  }
   
 });
 

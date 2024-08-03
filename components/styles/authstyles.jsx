@@ -13,6 +13,21 @@ const styles = StyleSheet.create({
     padding: 24,
     width: '100%',
   },
+  loadingContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1000,
+  },
+  loadingText: {
+    fontSize: 16,
+    color: '#133eba',
+    marginTop: 10,
+  },
   main: {
     flex: 1,
     justifyContent: 'center',
@@ -26,7 +41,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: 'PlusJakartaSans-Bold',
-    fontSize: 40,
+    fontSize: 30,
   },
   form: {
     width: '100%',
@@ -35,11 +50,23 @@ const styles = StyleSheet.create({
   },
   
   footer: {
-    marginTop: 20,
+    marginTop: 10,
     alignItems: 'center',
     fontFamily: 'PlusJakartaSans-Medium',
   },
   footerText: {
+    fontSize: 16,
+    color: '#000',
+    fontFamily: 'PlusJakartaSans-Bold',
+    color: '#133eba'
+  },
+
+  forgot: {
+    marginBottom: 10,
+    alignItems: 'flex-end',
+    fontFamily: 'PlusJakartaSans-Medium',
+  },
+  forgotText: {
     fontSize: 16,
     color: '#000',
     fontFamily: 'PlusJakartaSans-Bold',

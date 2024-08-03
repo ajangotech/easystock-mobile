@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, RefreshControl, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image, RefreshControl, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from '../../components/styles/styles';
@@ -7,6 +7,13 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton'
 import { CheckBox } from 'react-native-elements';
+import WalletBalance from '../../components/WalletBalance';
+
+import MtnLogo from '../../assets/vtu/mtn.png';
+import AirtelLogo from '../../assets/vtu/airtel.png';
+import GloLogo from '../../assets/vtu/glo.png';
+import Mobile9Logo from '../../assets/vtu/9mobile.png';
+
 
 const Data = () => {
 
@@ -37,18 +44,14 @@ const Data = () => {
     { label: '2GB SME', value: '2', plansType: 'SME', network_id: '1' },
     { label: '1GB CG', value: '3', plansType: 'CG', network_id: '2' },
     { label: '500MB SME', value: '4', plansType: 'SME', network_id: '2' },
-    // Add more plans as needed
   ];
 
-  const renderLabel = (label) => {
-    if (label || isFocus) {
-      return (
-        <Text style={[styles.label, isFocus && { color: 'blue' }]}>
-          {label}
-        </Text>
-      );
-    }
-    return null;
+ 
+  const networkLogos = {
+    '1': MtnLogo,
+    '2': AirtelLogo,
+    '3': GloLogo,
+    '4': Mobile9Logo,
   };
 
   const filteredPlans = plans.filter(plan =>
@@ -60,7 +63,7 @@ const Data = () => {
   }
 
   return (
-    <View style={{ marginTop: 20 }}>
+    <View style={{ marginTop: 0 }}>
       <ScrollView
         refreshControl={
           <RefreshControl
@@ -73,8 +76,7 @@ const Data = () => {
       >
         <View style={styles.safeArea}>
           <View style={styles.container}>
-            {/* Network Dropdown */}
-            {renderLabel('Select Network')}
+            <WalletBalance />
             <Dropdown
               style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
               placeholderStyle={styles.placeholderStyle}
@@ -107,8 +109,6 @@ const Data = () => {
               )}
             />
 
-            {/* Plan Type Dropdown */}
-            {selectedNetwork && renderLabel('Select Plan Type')}
             <Dropdown
               style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
               placeholderStyle={styles.placeholderStyle}
@@ -141,8 +141,6 @@ const Data = () => {
               disabled={!selectedNetwork}
             />
 
-            {/* Plans Dropdown */}
-            {selectedNetwork && selectedPlanType && renderLabel('Select Plan')}
             <Dropdown
               style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
               placeholderStyle={styles.placeholderStyle}
@@ -191,6 +189,15 @@ const Data = () => {
                   handleSubmit={handleSubmit}/>
               </TouchableOpacity>
             </View>
+
+            {selectedNetwork !== null && (
+              <View style={{ alignItems: 'center', marginTop: 20, borderRadius: 20}}>
+                <Image
+                  source={networkLogos[selectedNetwork]}
+                  style={{ width: 100, height: 100, resizeMode: 'contain', borderRadius: 20 }}
+                />
+              </View>
+            )}
 
           </View>
         </View>

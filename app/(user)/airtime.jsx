@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, RefreshControl, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image, RefreshControl, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from '../../components/styles/styles';
@@ -8,6 +8,12 @@ import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import { CheckBox } from 'react-native-elements';
 
+import MtnLogo from '../../assets/vtu/mtn.png';
+import AirtelLogo from '../../assets/vtu/airtel.png';
+import GloLogo from '../../assets/vtu/glo.png';
+import Mobile9Logo from '../../assets/vtu/9mobile.png';
+import WalletBalance from '../../components/WalletBalance';
+
 const Airtime = () => {
 
   const [refreshing, setRefreshing] = useState(false);
@@ -15,11 +21,9 @@ const Airtime = () => {
   const [isFocus, setIsFocus] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
-  // Function to handle refresh
+
   const onRefresh = () => {
     setRefreshing(true);
-    // Add your refresh logic here
-    // After refresh logic is done
     setRefreshing(false);
   };
 
@@ -30,23 +34,20 @@ const Airtime = () => {
     { label: '9MOBILE', value: '4' },
   ];
 
-  const renderLabel = (label) => {
-    if (label || isFocus) {
-      return (
-        <Text style={[styles.label, isFocus && { color: 'blue' }]}>
-          {label}
-        </Text>
-      );
-    }
-    return null;
+  const networkLogos = {
+    '1': MtnLogo,
+    '2': AirtelLogo,
+    '3': GloLogo,
+    '4': Mobile9Logo,
   };
 
+  
   const handleSubmit = () => {
-    // Add your submit logic here
+    
   };
 
   return (
-    <View style={{ marginTop: 20 }}>
+    <View style={{ marginTop: 0 }}>
       <ScrollView
         refreshControl={
           <RefreshControl
@@ -59,7 +60,7 @@ const Airtime = () => {
       >
         <View style={styles.safeArea}>
           <View style={styles.container}>
-            {renderLabel('Select Network')}
+            <WalletBalance />
             <Dropdown
               style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
               placeholderStyle={styles.placeholderStyle}
@@ -113,6 +114,15 @@ const Airtime = () => {
                 />
               </TouchableOpacity>
             </View>
+
+            {selectedNetwork !== null && (
+              <View style={{ alignItems: 'center', marginTop: 20, borderRadius: 20}}>
+                <Image
+                  source={networkLogos[selectedNetwork]}
+                  style={{ width: 100, height: 100, resizeMode: 'contain', borderRadius: 20 }}
+                />
+              </View>
+            )}
 
           </View>
         </View>

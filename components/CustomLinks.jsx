@@ -1,33 +1,19 @@
-import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
+import React from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { router } from 'expo-router';
 
-const CustomLinks = ({ title, icon_name }) => {
+const CustomLinks = ({ title, icon_name, handlePress }) => {
   return (
-    <TouchableWithoutFeedback>
-        <View style={styles.iconWrapper}>
-            <View style={styles.icon}>
-                <Ionicons name='wifi-outline' style={{ color: '#fff', fontSize: 30, fontWeight: 'bold' }} />
-            </View>
-            <Text style={{ fontFamily: 'PlusJakartaSans-Bold', }}>Buy Data</Text>
-        </View>
-    </TouchableWithoutFeedback>
-
-  )
-}
+    <TouchableOpacity onPress={() => router.push(handlePress)}>
+      <View style={{ alignContent: 'center', alignItems: 'center' }}>
+        <Ionicons name={icon_name} color="#133eba" size={25} />
+        <Text style={{ fontFamily: 'PlusJakartaSans-Bold', fontSize: 12 }}>
+          {title}
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
 
 export default CustomLinks;
-
-const styles = StyleSheet.create({
-    iconWrapper: {
-        
-    },
-    icon: {
-        backgroundColor: '#133eba',
-        width: 50,
-        color: '#fff',
-        borderRadius: 10,
-        alignContent: 'center',
-        alignItems:  'center'
-    }
-})
